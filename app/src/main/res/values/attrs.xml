@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VerificationCodeView">
+        <attr name="vcv_box_size" format="integer"/>
+        <attr name="vcv_textsize" format="dimension"/>
+        <attr name="vcv_box_height" format="dimension"/>
+        <attr name="vcv_box_width" format="dimension"/>
+    </declare-styleable>
+    <declare-styleable name="AutoVerificationCodeView">
+        <attr name="avcv_box_size" format="integer"/>
+        <attr name="avcv_textsize" format="dimension"/>
+        <attr name="avcv_box_margin" format="dimension"/>
+    </declare-styleable>
+</resources>
