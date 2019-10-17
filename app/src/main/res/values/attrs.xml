@@ -10,5 +10,6 @@
         <attr name="avcv_box_size" format="integer"/>
         <attr name="avcv_textsize" format="dimension"/>
         <attr name="avcv_box_margin" format="dimension"/>
+        <attr name="avcv_icon" format="integer"/>
     </declare-styleable>
 </resources>

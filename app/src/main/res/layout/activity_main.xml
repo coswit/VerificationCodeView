@@ -12,6 +12,7 @@
        avc:avcv_box_size="4"
        avc:avcv_textsize="13sp"
        android:layout_width="match_parent"
+       avc:avcv_icon="@drawable/shape_edit_code"
        android:layout_height="100dp"/>
 
 

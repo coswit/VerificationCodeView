@@ -19,9 +19,11 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.git.www.verificationcodeview.R;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +51,7 @@ public class AutoVerificationCodeView extends LinearLayoutCompat implements Text
     private Drawable focusDrawable;
     private Drawable unfocusDrawable;
     private TextCompleteListener listener;
+    private int mCursor;
 
     public AutoVerificationCodeView(Context context) {
         super(context);
@@ -71,6 +74,7 @@ public class AutoVerificationCodeView extends LinearLayoutCompat implements Text
         blockSize = typedArray.getInt(R.styleable.AutoVerificationCodeView_avcv_box_size, blockSize);
         textsize = typedArray.getLayoutDimension(R.styleable.AutoVerificationCodeView_avcv_textsize, textsize);
         boxMargin = typedArray.getLayoutDimension(R.styleable.AutoVerificationCodeView_avcv_box_margin,boxMargin);
+        mCursor = typedArray.getResourceId(R.styleable.AutoVerificationCodeView_avcv_icon,-1);
 
         typedArray.recycle();
 
@@ -96,7 +100,9 @@ public class AutoVerificationCodeView extends LinearLayoutCompat implements Text
             editText.setInputType(inputType);
             editText.addTextChangedListener(this);
             editText.setOnKeyListener(this);
-
+            if(mCursor >0){
+                setCursorColor(editText);
+            }
             container.add(editText);
             addView(editText);
 
@@ -169,6 +175,7 @@ public class AutoVerificationCodeView extends LinearLayoutCompat implements Text
 
         for (int i = 0; i < blockSize; i++) {
             if (TextUtils.isEmpty(container.get(i).getText())) {
+                sb.delete(0,sb.length());
                 return;
             }
         }
@@ -215,6 +222,19 @@ public class AutoVerificationCodeView extends LinearLayoutCompat implements Text
         }
         container.get(0).requestFocus();
         checkBackground();
+    }
+
+    /**
+     * 设置闪烁光标颜色
+     * @param editText EditText
+     */
+    private void setCursorColor(EditText editText) {
+        try {
+            Field f = TextView.class.getDeclaredField("mCursorDrawableRes");
+            f.setAccessible(true);
+            f.set(editText, mCursor);
+        } catch (Exception ignored) {
+        }
     }
 
 }
